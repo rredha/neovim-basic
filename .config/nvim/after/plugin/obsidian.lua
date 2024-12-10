@@ -1,49 +1,30 @@
 require("obsidian").setup(
 {
   -- A list of workspace names, paths, and configuration overrides.
-  -- If you use the Obsidian app, the 'path' of a workspace should generally be
-  -- your vault root (where the `.obsidian` folder is located).
+	--
   -- When obsidian.nvim is loaded by your plugin manager, it will automatically set
   -- the workspace to the first workspace in the list whose `path` is a parent of the
   -- current markdown file being edited.
+	--
+	-- If you use the Obsidian app, the 'path' of a workspace should generally be
+	-- your vault root (where the `.obsidian` folder is located).
   workspaces = {
     {
-      name = "personal",
-      path = "vaults/personal",
-    },
-    {
-      name = "work",
-      path = "vaults/work",
-      -- Optional, override certain settings.
-      overrides = {
-        notes_subdir = "notes",
-      },
+      name = "test",
+      path = "personal",
     },
   },
 
-  -- Alternatively - and for backwards compatibility - you can set 'dir' to a single path instead of
-  -- 'workspaces'. For example:
-  -- dir = "~/vaults/work",
-
   -- Optional, if you keep notes in a specific subdirectory of your vault.
-  notes_subdir = "notes",
+  notes_subdir = "trunck",
+	-- Where to put new notes. Valid options are
+	--  * "current_dir" - put new notes in same directory as the current buffer.
+	--  * "notes_subdir" - put new notes in the default notes subdirectory.
+	new_notes_location = "notes_subdir",
 
   -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log
   -- levels defined by "vim.log.levels.*".
   log_level = vim.log.levels.INFO,
-
-  daily_notes = {
-    -- Optional, if you keep daily notes in a separate directory.
-    folder = "notes/dailies",
-    -- Optional, if you want to change the date format for the ID of daily notes.
-    date_format = "%Y-%m-%d",
-    -- Optional, if you want to change the date format of the default alias of daily notes.
-    alias_format = "%B %-d, %Y",
-    -- Optional, default tags to add to each new daily note created.
-    default_tags = { "daily-notes" },
-    -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
-    template = nil
-  },
 
   -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
   completion = {
@@ -63,26 +44,8 @@ require("obsidian").setup(
       end,
       opts = { noremap = false, expr = true, buffer = true },
     },
-    -- Toggle check-boxes.
-    ["<leader>ch"] = {
-      action = function()
-        return require("obsidian").util.toggle_checkbox()
-      end,
-      opts = { buffer = true },
-    },
-    -- Smart action depending on context, either follow link or toggle checkbox.
-    ["<cr>"] = {
-      action = function()
-        return require("obsidian").util.smart_action()
-      end,
-      opts = { buffer = true, expr = true },
-    }
   },
 
-  -- Where to put new notes. Valid options are
-  --  * "current_dir" - put new notes in same directory as the current buffer.
-  --  * "notes_subdir" - put new notes in the default notes subdirectory.
-  new_notes_location = "notes_subdir",
 
   -- Optional, customize how note IDs are generated given an optional title.
   ---@param title string|?
