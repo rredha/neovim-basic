@@ -1,3 +1,5 @@
 .local/
 .config/gh
-vaults/
+personal/
+trunck/
+.obsidian/
